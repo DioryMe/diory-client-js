@@ -46,9 +46,21 @@ class DioryClient implements IDioryClient {
 
     await this.getDiosphere()
     await this.enterRoom({ id: '/' })
-    await this.focusDiory({ id: '/' })
 
     return
+  }
+
+  enterRoom = async (roomObject: IRoomObject): Promise<IRoom> => {
+    this.room = this.diosphere.getRoom(roomObject)
+
+    await this.getDiograph()
+    this.focusDiory({ id: '/' })
+
+    return this.room
+  }
+
+  focusDiory = (dioryObject: IDioryObject): IDiory => {
+    return (this.diory = this.diograph.getDiory(dioryObject))
   }
 
   getDiosphere = async (): Promise<void> => {
@@ -84,14 +96,6 @@ class DioryClient implements IDioryClient {
     return
   }
 
-  enterRoom = async (roomObject: IRoomObject): Promise<IRoom> => {
-    this.room = this.diosphere.getRoom(roomObject)
-
-    await this.getDiograph()
-
-    return this.room
-  }
-
   getDiograph = async (): Promise<void> => {
     console.info('getDiograph', this.room?.connections)
     if (this.room?.connections) {
@@ -123,10 +127,6 @@ class DioryClient implements IDioryClient {
     }
 
     return
-  }
-
-  focusDiory = (dioryObject: IDioryObject): IDiory => {
-    return (this.diory = this.diograph.getDiory(dioryObject))
   }
 }
 
