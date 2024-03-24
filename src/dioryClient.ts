@@ -44,15 +44,17 @@ class DioryClient implements IDioryClient {
   initialise = async (connections: IConnectionObject[]): Promise<void> => {
     this.connections = connections
 
+    this.diosphere.resetRooms()
     await this.getDiosphere()
     await this.enterRoom({ id: '/' })
 
     return
   }
 
-  enterRoom = async (roomObject: IRoomObject): Promise<IRoom> => {
+  enterRoom = async (roomObject: IRoomObject): Promise<void> => {
     this.room = this.diosphere.getRoom(roomObject)
 
+    this.diograph.resetDiories()
     await this.getDiograph()
     this.focusDiory({ id: '/' })
 
