@@ -1,11 +1,6 @@
-import { join } from 'path-browserify'
-
 import { IDiographObject } from '@diograph/diograph'
 import { IConnectionObject, IDiosphereObject } from '@diory/diosphere-js'
 import { IConnectionClient, IDataClient } from './types'
-
-const DIOSPHERE_JSON = 'diosphere.json'
-const DIOGRAPH_JSON = 'diograph.json'
 
 class ConnectionClient implements IConnectionClient {
   type: string
@@ -19,27 +14,23 @@ class ConnectionClient implements IConnectionClient {
   }
 
   getDiosphere = async () => {
-    const diosphereString = await this.client.readTextItem(
-      join(this.connection.address, DIOSPHERE_JSON),
-    )
+    const diosphereString = await this.client.readTextItem(this.connection.address)
     return JSON.parse(diosphereString)
   }
 
   saveDiosphere = async (diosphereObject: IDiosphereObject) => {
-    const diosphereString = JSON.stringify(diosphereObject)
-    return this.client.writeItem(join(this.connection.address, DIOSPHERE_JSON), diosphereString)
+    const diosphereString = JSON.stringify(diosphereObject, null, 2)
+    return this.client.writeItem(this.connection.address, diosphereString)
   }
 
   getDiograph = async () => {
-    const diographString = await this.client.readTextItem(
-      join(this.connection.address, DIOGRAPH_JSON),
-    )
+    const diographString = await this.client.readTextItem(this.connection.address)
     return JSON.parse(diographString)
   }
 
   saveDiograph = async (diographObject: IDiographObject) => {
-    const diosphereString = JSON.stringify(diographObject)
-    return this.client.writeItem(join(this.connection.address, DIOGRAPH_JSON), diosphereString)
+    const diographString = JSON.stringify(diographObject, null, 2)
+    return this.client.writeItem(this.connection.address, diographString)
   }
 }
 

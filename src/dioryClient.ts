@@ -1,27 +1,8 @@
 import { Diosphere, IConnectionObject, IDiosphere, IRoom, IRoomObject } from '@diory/diosphere-js'
 import { Diograph, IDiograph, IDiory, IDioryObject } from '@diograph/diograph'
 
-import { IConnectionClient, IDataClient, IDioryClient } from './types'
-import { ConnectionClient } from './connectionClient'
-
-function getDataClient(
-  dataClients: IDataClient[],
-  { client }: IConnectionObject,
-): IDataClient | undefined {
-  return dataClients.find(({ type }) => type === client)
-}
-
-function getConnectionClients(
-  dataClients: IDataClient[],
-  connections: IConnectionObject[],
-): IConnectionClient[] {
-  return connections
-    .filter(({ client }) => dataClients.some(({ type }) => type === client))
-    .map((connection) => {
-      const dataClient = getDataClient(dataClients, connection)
-      return new ConnectionClient(dataClient!, connection)
-    }) as IConnectionClient[]
-}
+import { IDataClient, IDioryClient } from './types'
+import { getConnectionClients } from './utils/getConnectionClients'
 
 class DioryClient implements IDioryClient {
   dataClients: IDataClient[] = []
@@ -41,20 +22,20 @@ class DioryClient implements IDioryClient {
     this.diograph.saveDiograph = this.saveDiograph
   }
 
-  initialise = async (connections: IConnectionObject[]): Promise<void> => {
+  initialise = async (connections: IConnectionObject[]): Promise<IDioryClient> => {
     this.connections = connections
 
     this.diosphere.resetRooms()
     await this.getDiosphere()
     await this.enterRoom({ id: '/' })
 
-    return
+    return this
   }
 
-  enterRoom = async (roomObject: IRoomObject): Promise<void> => {
+  enterRoom = async (roomObject: IRoomObject): Promise<IRoom> => {
     this.room = this.diosphere.getRoom(roomObject)
 
-    this.diograph.resetDiories()
+    this.diograph.resetDiograph()
     await this.getDiograph()
     this.focusDiory({ id: '/' })
 

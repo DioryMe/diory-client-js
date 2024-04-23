@@ -5,8 +5,7 @@ import {
   IRoom,
   IRoomObject,
 } from '@diory/diosphere-js'
-import { IDiograph, IDiory } from '@diograph/diograph'
-import { IDiographObject, IDioryObject } from '@diograph/diograph'
+import { IDiographObject, IDiograph, IDiory, IDioryObject } from '@diograph/diograph'
 
 export interface IDataClient {
   type: string
@@ -38,8 +37,8 @@ export interface IDioryClient {
   room?: IRoom
   diograph: IDiograph
   diory?: IDiory
-  initialise: (connections: IConnectionObject[]) => Promise<void>
-  enterRoom: (roomObject: IRoomObject) => Promise<void>
+  initialise: (connections: IConnectionObject[]) => Promise<IDioryClient>
+  enterRoom: (roomObject: IRoomObject) => Promise<IRoom>
   focusDiory: (dioryObject: IDioryObject) => IDiory
   getDiosphere: () => void
   saveDiosphere: () => void
