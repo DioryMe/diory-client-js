@@ -1,4 +1,5 @@
 import { join } from 'path-browserify'
+import { generateDiograph } from '@diograph/folder-generator'
 
 import { IDiographObject } from '@diograph/diograph'
 import { IConnectionObject, IDiosphereObject } from '@diory/diosphere-js'
@@ -40,6 +41,11 @@ class ConnectionClient implements IConnectionClient {
     const path = join(this.connection.address, DIOGRAPH_JSON)
     const diographString = JSON.stringify(diographObject, null, 2)
     return this.client.writeItem(path, diographString)
+  }
+
+  generateDiograph = async (): Promise<IDiographObject> => {
+    const { diograph } = await generateDiograph(this.connection.address) // TODO: Client
+    return diograph.toObject()
   }
 }
 

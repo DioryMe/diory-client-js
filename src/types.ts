@@ -28,6 +28,7 @@ export interface IConnectionClient {
   saveDiosphere: (diosphereObject: IDiosphereObject) => void
   getDiograph: () => Promise<IDiographObject>
   saveDiograph: (diographObject: IDiographObject) => void
+  generateDiograph: () => Promise<IDiographObject>
 }
 
 export interface IDioryClient {
@@ -40,8 +41,9 @@ export interface IDioryClient {
   initialise: (connections: IConnectionObject[]) => Promise<IDioryClient>
   enterRoom: (roomObject: IRoomObject) => Promise<IRoom>
   focusDiory: (dioryObject: IDioryObject) => IDiory
-  getDiosphere: () => void
-  saveDiosphere: () => void
-  getDiograph: () => void
-  saveDiograph: () => void
+  getDiosphere: () => Promise<IDiosphere>
+  saveDiosphere: () => Promise<IDiosphere>
+  getDiograph: () => Promise<IDiograph>
+  saveDiograph: () => Promise<IDiograph>
+  generateDiograph: () => Promise<IDiograph>
 }

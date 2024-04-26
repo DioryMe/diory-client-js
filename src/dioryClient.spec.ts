@@ -10,4 +10,10 @@ describe('dioryClient', () => {
       expect(true).toEqual(true)
     })
   })
+
+  describe('enterRoom()', () => {
+    it('should initialise with connections', () => {
+      expect(true).toEqual(true)
+    })
+  })
 })
