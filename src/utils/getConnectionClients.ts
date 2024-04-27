@@ -1,7 +1,7 @@
 import { IConnectionObject } from '@diory/diosphere-js'
 
+import { ConnectionClient } from '../connectionClient/connectionClient'
 import { IConnectionClient, IDataClient } from '../types'
-import { ConnectionClient } from '../connectionClient'
 
 function getDataClient(
   dataClients: IDataClient[],
