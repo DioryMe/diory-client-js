@@ -3,7 +3,7 @@ import { generateDiograph } from '@diograph/folder-generator'
 
 import { IDiographObject } from '@diograph/diograph'
 import { IConnectionObject, IDiosphereObject } from '@diory/diosphere-js'
-import { IConnectionClient, IDataClient } from './types'
+import { IConnectionClient, IDataClient } from '../types'
 
 const DIOSPHERE_JSON = 'diosphere.json'
 const DIOGRAPH_JSON = 'diograph.json'
@@ -44,7 +44,7 @@ class ConnectionClient implements IConnectionClient {
   }
 
   generateDiograph = async (): Promise<IDiographObject> => {
-    const { diograph } = await generateDiograph(this.connection.address) // TODO: Client
+    const { diograph } = await generateDiograph(this.connection.address, this.client)
     return diograph.toObject()
   }
 }

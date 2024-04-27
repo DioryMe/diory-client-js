@@ -405,6 +405,21 @@
     sharp "0.31.2"
     uuid "^9.0.0"
 
+"@diograph/file-generator@^0.1.2-rc9":
+  version "0.1.2-rc9"
+  resolved "https://registry.yarnpkg.com/@diograph/file-generator/-/file-generator-0.1.2-rc9.tgz#d57739748187457777f5a278c4598590e5cda16f"
+  integrity sha512-wzOsoVEmV26RHVY1c3JucZm0XsgIn7cyU/mNFD1K0L60dtZjo2JByAHSJZItlNWfbukSem78yZUPTs6LqS4xCA==
+  dependencies:
+    "@diograph/diograph" "0.3.0-rc11"
+    "@diograph/local-client" "^0.3.0-rc3"
+    "@types/path-browserify" "^1.0.2"
+    exifreader "^4.8.1"
+    file-type "^16.4.0"
+    multiformats "^9.6.0"
+    path-browserify "^1.0.1"
+    sharp "0.31.2"
+    uuid "^9.0.0"
+
 "@diograph/folder-generator@^0.2.0-rc1":
   version "0.2.0-rc1"
   resolved "https://registry.yarnpkg.com/@diograph/folder-generator/-/folder-generator-0.2.0-rc1.tgz#4da93f3bca6789a90837af7fbc04899f8f4ab047"
@@ -414,7 +429,28 @@
     "@diograph/file-generator" "0.1.2-rc8"
     uuid "^8.3.2"
 
-"@diory/diosphere-js@0.2.6-rc2":
+"@diograph/folder-generator@^0.3.0-rc1":
+  version "0.3.0-rc1"
+  resolved "https://registry.yarnpkg.com/@diograph/folder-generator/-/folder-generator-0.3.0-rc1.tgz#e6a7805e0b55779570871a9cc564e81637f78137"
+  integrity sha512-Y4/LrdW/jaKZp4zvJFJEk2uinAgM32wQTfK679MonwanH9ZIcFa+7FxCmUM43f1hEt9FkrDA1gMhUhLenCrl/A==
+  dependencies:
+    "@diograph/diograph" "0.3.0-rc12"
+    "@diograph/file-generator" "^0.1.2-rc9"
+    "@diograph/local-client" "^0.3.0-rc3"
+    path-browserify "^1.0.1"
+    uuid "^8.3.2"
+
+"@diograph/local-client@^0.3.0-rc3":
+  version "0.3.0-rc3"
+  resolved "https://registry.yarnpkg.com/@diograph/local-client/-/local-client-0.3.0-rc3.tgz#5eaf90f56debace42c2b1ee855e094d11216fefa"
+  integrity sha512-VW7n89RMukaPtPwE4dvceUqjphng3m7i0zrt/wl35ELPlRcnptvsXznqEfv9mkp+NYkTQJ8/Hy/Wivy32Xi8xQ==
+  dependencies:
+    "@diograph/diograph" "0.3.0-rc14"
+    "@diograph/folder-generator" "^0.2.0-rc1"
+    "@diory/diosphere-js" "^0.2.6-rc2"
+    path-browserify "^1.0.1"
+
+"@diory/diosphere-js@0.2.6-rc2", "@diory/diosphere-js@^0.2.6-rc2":
   version "0.2.6-rc2"
   resolved "https://registry.yarnpkg.com/@diory/diosphere-js/-/diosphere-js-0.2.6-rc2.tgz#dfe334927d231795dfdbd87f8a538b0ed50c03b5"
   integrity sha512-NN7/TFkQcgF0UANcAkWjUtI9swX8LPwYVm6g4oDZ6Rib9dNCSBvAyjq8GJ/VMYPLyMaS3WZBgQZ5+EoLF9Xnjg==
