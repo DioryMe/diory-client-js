@@ -1,8 +1,8 @@
 import { Diosphere, IConnectionObject, IDiosphere, IRoom, IRoomObject } from '@diory/diosphere-js'
 import { Diograph, IDiograph, IDiory, IDioryObject } from '@diograph/diograph'
 
-import { IDataClient, IDioryClient } from './types'
-import { getConnectionClients } from './utils/getConnectionClients'
+import { IDioryClient, IDataClient } from '../types'
+import { getConnectionClients } from '../utils/getConnectionClients'
 
 class DioryClient implements IDioryClient {
   dataClients: IDataClient[] = []
@@ -38,8 +38,6 @@ class DioryClient implements IDioryClient {
     this.diograph.resetDiograph()
     await this.getDiograph()
     this.focusDiory({ id: '/' })
-
-    await this.generateDiograph()
 
     return this.room
   }
