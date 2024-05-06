@@ -124,7 +124,11 @@ class DioryClient implements IDioryClient {
         connectionClients.map(async (connectionClient) => {
           const diographObject = await connectionClient.generateDiograph()
           console.info(diographObject)
-          this.diograph.addDiograph(diographObject)
+          Object.entries(diographObject).forEach(([key, dioryObject]) => {
+            key === '/'
+              ? this.diograph.addDioryLink({ id: '/' }, diographObject['/'])
+              : this.diograph.addDiory(dioryObject)
+          })
 
           await connectionClient.saveDiograph(this.diograph.toObject())
           return
