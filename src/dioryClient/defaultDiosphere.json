@@ -1,0 +1,22 @@
+{
+  "rooms": {
+    "/": {
+      "id": "welcome-room",
+      "created": "2024-03-24T14:56:21.243Z",
+      "modified": "2024-03-24T14:56:21.243Z"
+    },
+    "welcome-room": {
+      "id": "welcome-room",
+      "text": "Wellcome room",
+      "doors": [],
+      "connections": [
+        {
+          "client": "LocalClient",
+          "address": "public/welcome-room"
+        }
+      ],
+      "created": "2024-03-24T14:56:21.243Z",
+      "modified": "2024-03-24T14:56:21.243Z"
+    }
+  }
+}

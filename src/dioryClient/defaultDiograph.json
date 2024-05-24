@@ -1,0 +1,23 @@
+{
+  "/": {
+    "id": "welcome-root-diory"
+  },
+  "welcome-root-diory": {
+    "id": "welcome-root-diory",
+    "image": "",
+    "links": [
+      {
+        "id": "welcome-diory"
+      }
+    ],
+    "modified": "2020-01-03T14:03:04.751Z"
+  },
+  "welcome-diory": {
+    "id": "welcome-diory",
+    "image": "",
+    "modified": "2020-01-03T14:03:04.751Z",
+    "text": "Welcome to Diory",
+    "latitude": 60.01366036242365,
+    "longitude": 20.007133483886722
+  }
+}
