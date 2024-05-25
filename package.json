@@ -1,6 +1,6 @@
 {
   "name": "@diory/client-js",
-  "version": "0.2.0-rc14",
+  "version": "0.2.0-rc15",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Olli-Pekka Pohjola <op@diory.me>, Jouni Alanen <jouni@diory.me>",
