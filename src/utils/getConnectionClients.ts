@@ -12,10 +12,10 @@ function getDataClient(
 
 export function getConnectionClients(
   dataClients: IDataClient[],
-  connections: IConnectionObject[],
+  connections?: IConnectionObject[],
 ): IConnectionClient[] {
   return connections
-    .filter(({ client }) => dataClients.some(({ type }) => type === client))
+    ?.filter(({ client }) => dataClients.some(({ type }) => type === client))
     .map((connection) => {
       const dataClient = getDataClient(dataClients, connection)
       return new ConnectionClient(dataClient!, connection)

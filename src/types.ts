@@ -58,12 +58,13 @@ export interface IDioryClient {
   room?: IRoom
   diograph: IDiograph
   diory?: IDiory
-  initialise: (connections: IConnectionObject[]) => Promise<IDioryClient>
-  enterRoom: (roomObject: IRoomObject) => Promise<IRoom>
+  selectRoom: (roomObject: IRoomObject) => IRoom
+  getDiosphere: () => Promise<IDiosphereObject | undefined>
+  saveDiosphere: () => Promise<IDiosphereObject>
+  initialiseDiosphere: (connections: IConnectionObject[]) => Promise<IDiosphere>
   focusDiory: (dioryObject: IDioryObject) => IDiory
-  getDiosphere: () => Promise<IDiosphere>
-  saveDiosphere: () => Promise<IDiosphere>
-  getDiograph: () => Promise<IDiograph>
-  saveDiograph: () => Promise<IDiograph>
+  getDiograph: () => Promise<IDiographObject | undefined>
+  saveDiograph: () => Promise<IDiographObject>
+  initialiseDiograph: (roomObject: IRoomObject) => Promise<IDiograph>
   generateDiograph: () => Promise<IDiograph>
 }

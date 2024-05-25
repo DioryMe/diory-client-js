@@ -1,8 +1,18 @@
-import { Diosphere, IConnectionObject, IDiosphere, IRoom, IRoomObject } from '@diory/diosphere-js'
-import { Diograph, IDiograph, IDiory, IDioryObject } from '@diograph/diograph'
+import {
+  Diosphere,
+  IConnectionObject,
+  IDiosphere,
+  IDiosphereObject,
+  IRoom,
+  IRoomObject,
+} from '@diory/diosphere-js'
+import { Diograph, IDiograph, IDiographObject, IDiory, IDioryObject } from '@diograph/diograph'
 
 import { IDioryClient, IDataClient } from '../types'
 import { getConnectionClients } from '../utils/getConnectionClients'
+
+import { getDefaultDiosphere } from './getDefaultDiosphere'
+import { getDefaultDiograph } from './getDefaultDiograph'
 
 class DioryClient implements IDioryClient {
   dataClients: IDataClient[] = []
@@ -22,119 +32,140 @@ class DioryClient implements IDioryClient {
     this.diograph.saveDiograph = this.saveDiograph
   }
 
-  initialise = async (connections: IConnectionObject[]): Promise<IDioryClient> => {
+  selectRoom = (roomObject: IRoomObject): IRoom => {
+    return (this.room = this.diosphere.getRoom(roomObject))
+  }
+
+  getDiosphereClients = (connections?: IConnectionObject[]) => {
+    return getConnectionClients(this.dataClients, connections ?? this.connections)
+  }
+
+  initialiseDiosphere = async (connections: IConnectionObject[]): Promise<IDiosphere> => {
+    console.info('initialiseDiosphere', connections)
     this.connections = connections
 
     this.diosphere.resetRooms()
-    await this.getDiosphere()
-    await this.enterRoom({ id: '/' })
+    const diosphereObject = (await this.getDiosphere()) ?? getDefaultDiosphere(connections)
+    this.diosphere.addDiosphere(diosphereObject)
+    await this.saveDiosphere()
 
-    return this
+    this.selectRoom({ id: '/' })
+
+    console.info(this.diosphere.toObject())
+    return this.diosphere
   }
 
-  enterRoom = async (roomObject: IRoomObject): Promise<IRoom> => {
-    this.room = this.diosphere.getRoom(roomObject)
+  getDiosphere = async (
+    connections?: IConnectionObject[],
+  ): Promise<IDiosphereObject | undefined> => {
+    console.info('getDiosphere', connections)
 
-    this.diograph.resetDiograph()
-    await this.getDiograph()
-    this.focusDiory({ id: '/' })
+    let diosphereObject
+    await Promise.all(
+      this.getDiosphereClients(connections).map(async (connectionClient) => {
+        try {
+          diosphereObject = await connectionClient.getDiosphere()
+          console.info(diosphereObject)
+        } catch (error) {
+          console.error(error)
+        }
+        return
+      }),
+    )
 
-    return this.room
+    return diosphereObject
+  }
+
+  saveDiosphere = async (connections?: IConnectionObject[]): Promise<IDiosphereObject> => {
+    console.info('saveDiosphere', connections)
+
+    const diosphereObject = this.diosphere.toObject()
+    await Promise.all(
+      this.getDiosphereClients(connections).map(async (connectionClient) => {
+        await connectionClient.saveDiosphere(diosphereObject)
+        console.info(diosphereObject)
+        return
+      }),
+    )
+
+    return diosphereObject
+  }
+
+  getDiographClients = (connections?: IConnectionObject[]) => {
+    return getConnectionClients(this.dataClients, connections ?? this.room?.connections)
   }
 
   focusDiory = (dioryObject: IDioryObject): IDiory => {
     return (this.diory = this.diograph.getDiory(dioryObject))
   }
 
-  getDiosphere = async (): Promise<IDiosphere> => {
-    console.info('getDiosphere', this.connections)
-    if (this.connections) {
-      const connectionClients = getConnectionClients(this.dataClients, this.connections)
+  initialiseDiograph = async (roomObject: IRoomObject): Promise<IDiograph> => {
+    console.info('initialiseDiograph', roomObject)
+    this.selectRoom(roomObject)
 
-      await Promise.all(
-        connectionClients.map(async (connectionClient) => {
-          const diosphereObject = await connectionClient.getDiosphere()
-          console.info(diosphereObject)
-          return this.diosphere.addDiosphere(diosphereObject)
-        }),
-      )
-    }
+    this.diograph.resetDiograph()
+    const diographObject = (await this.getDiograph()) ?? getDefaultDiograph()
+    this.diograph.addDiograph(diographObject)
+    await this.saveDiograph()
 
-    return this.diosphere
-  }
+    this.focusDiory({ id: '/' })
 
-  saveDiosphere = async (): Promise<IDiosphere> => {
-    console.info('saveDiosphere', this.connections)
-    if (this.connections) {
-      const connectionClients = getConnectionClients(this.dataClients, this.connections)
-
-      await Promise.all(
-        connectionClients.map(async (connectionClient) => {
-          console.info(this.diosphere.toObject())
-          await connectionClient.saveDiosphere(this.diosphere.toObject())
-          return
-        }),
-      )
-    }
-
-    return this.diosphere
-  }
-
-  getDiograph = async (): Promise<IDiograph> => {
-    console.info('getDiograph', this.room?.connections)
-    if (this.room?.connections) {
-      const connectionClients = getConnectionClients(this.dataClients, this.room.connections)
-
-      await Promise.all(
-        connectionClients.map(async (connectionClient) => {
-          const diographObject = await connectionClient.getDiograph()
-          console.info(diographObject)
-          this.diograph.addDiograph(diographObject)
-          return
-        }),
-      )
-    }
-
+    console.info(this.diograph.toObject())
     return this.diograph
   }
 
-  saveDiograph = async (): Promise<IDiograph> => {
-    console.info('saveDiograph', this.room?.connections)
-    if (this.room?.connections) {
-      const connectionClients = getConnectionClients(this.dataClients, this.room.connections)
+  getDiograph = async (connections?: IConnectionObject[]): Promise<IDiographObject | undefined> => {
+    console.info('getDiograph', connections)
 
-      await Promise.all(
-        connectionClients.map(async (connectionClient) => {
-          console.info(this.diograph.toObject())
-          await connectionClient.saveDiograph(this.diograph.toObject())
-          return
-        }),
-      )
-    }
+    let diographObject
+    await Promise.all(
+      this.getDiographClients(connections).map(async (connectionClient) => {
+        try {
+          diographObject = await connectionClient.getDiograph()
+          console.info(diographObject)
+        } catch (error) {
+          console.error(error)
+        }
+        return
+      }),
+    )
 
-    return this.diograph
+    return diographObject
   }
 
-  generateDiograph = async (): Promise<IDiograph> => {
-    console.info('generateDiograph', this.room?.connections)
-    if (this.room?.connections) {
-      const connectionClients = getConnectionClients(this.dataClients, this.room?.connections)
+  saveDiograph = async (connections?: IConnectionObject[]): Promise<IDiographObject> => {
+    console.info('saveDiograph', connections)
 
-      await Promise.all(
-        connectionClients.map(async (connectionClient) => {
-          const diographObject = await connectionClient.generateDiograph()
-          console.info(diographObject)
-          Object.entries(diographObject).forEach(([key, dioryObject]) => {
-            key === '/'
-              ? this.diograph.addDioryLink({ id: '/' }, diographObject['/'])
-              : this.diograph.addDiory(dioryObject)
-          })
+    const diographObject = this.diograph.toObject()
+    await Promise.all(
+      this.getDiographClients(connections).map(async (connectionClient) => {
+        await connectionClient.saveDiograph(diographObject)
+        console.info(diographObject)
+        return
+      }),
+    )
 
-          await connectionClient.saveDiograph(this.diograph.toObject())
-          return
-        }),
-      )
-    }
+    return diographObject
+  }
+
+  generateDiograph = async (connections?: IConnectionObject[]): Promise<IDiograph> => {
+    console.info('generateDiograph', connections)
+
+    await Promise.all(
+      this.getDiographClients(connections).map(async (connectionClient) => {
+        const diographObject = await connectionClient.generateDiograph()
+        Object.entries(diographObject).forEach(([key, dioryObject]) => {
+          key === '/'
+            ? this.diograph.addDioryLink({ id: '/' }, diographObject['/'])
+            : this.diograph.addDiory(dioryObject)
+        })
+
+        await connectionClient.saveDiograph(this.diograph.toObject())
+        console.info(this.diograph.toObject())
+
+        return
+      }),
+    )
 
     return this.diograph
   }

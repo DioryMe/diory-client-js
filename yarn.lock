@@ -393,6 +393,14 @@
     ajv "^8.12.0"
     uuid "^8.3.2"
 
+"@diograph/diograph@0.3.0-rc16":
+  version "0.3.0-rc16"
+  resolved "https://registry.yarnpkg.com/@diograph/diograph/-/diograph-0.3.0-rc16.tgz#a37200e28e74cabd4d38ecf540f6b27981274148"
+  integrity sha512-XPT8Fexp+uoEvqFiuV7+JpCo9IoKoEBOd/bKkEmhR8E0VpeGtrdP6mIrmK5zS8WWwpoICqeALzmXckSWKW5uMQ==
+  dependencies:
+    ajv "^8.12.0"
+    uuid "^8.3.2"
+
 "@diograph/file-generator@0.1.2-rc8":
   version "0.1.2-rc8"
   resolved "https://registry.yarnpkg.com/@diograph/file-generator/-/file-generator-0.1.2-rc8.tgz#049f0912962f969c525df87efbe2ab0d534bdceb"
@@ -502,6 +510,13 @@
   version "0.2.6-rc2"
   resolved "https://registry.yarnpkg.com/@diory/diosphere-js/-/diosphere-js-0.2.6-rc2.tgz#dfe334927d231795dfdbd87f8a538b0ed50c03b5"
   integrity sha512-NN7/TFkQcgF0UANcAkWjUtI9swX8LPwYVm6g4oDZ6Rib9dNCSBvAyjq8GJ/VMYPLyMaS3WZBgQZ5+EoLF9Xnjg==
+  dependencies:
+    uuid "8.3.2"
+
+"@diory/diosphere-js@0.2.6-rc4":
+  version "0.2.6-rc4"
+  resolved "https://registry.yarnpkg.com/@diory/diosphere-js/-/diosphere-js-0.2.6-rc4.tgz#bb66d783ab8f97fd697ba50703c6f5dc0f5c78f0"
+  integrity sha512-W3NKiqIGOWvp3yoBg4b3p+XetgH6ebaf9uiPXc3g3qa7TBRMEYI4xdLLsdr9rzy8soepcTTnZaXdZMVoY8D8xA==
   dependencies:
     uuid "8.3.2"
 
