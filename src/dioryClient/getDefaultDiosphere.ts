@@ -4,7 +4,7 @@ export const getDefaultDiosphere = (connections: IConnectionObject[]): IDiospher
   const diosphere = new Diosphere()
   diosphere.addRoom(
     {
-      text: 'Welcome room',
+      text: 'Room',
       connections,
     },
     '/',

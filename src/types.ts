@@ -54,17 +54,18 @@ export interface IConnectionClient {
 export interface IDioryClient {
   dataClients: IDataClient[]
   connections: IConnectionObject[]
-  diosphere: IDiosphere
-  room?: IRoom
-  diograph: IDiograph
   diory?: IDiory
-  selectRoom: (roomObject: IRoomObject) => IRoom
-  getDiosphere: () => Promise<IDiosphereObject | undefined>
-  saveDiosphere: () => Promise<IDiosphereObject>
-  initialiseDiosphere: (connections: IConnectionObject[]) => Promise<IDiosphere>
   focusDiory: (dioryObject: IDioryObject) => IDiory
-  getDiograph: () => Promise<IDiographObject | undefined>
-  saveDiograph: () => Promise<IDiographObject>
+  room?: IRoom
+  selectRoom: (roomObject: IRoomObject) => IRoom
+  diograph: IDiograph
   initialiseDiograph: (roomObject: IRoomObject) => Promise<IDiograph>
-  generateDiograph: () => Promise<IDiograph>
+  getDiograph: (connections?: IConnectionObject[]) => Promise<IDiographObject | undefined>
+  saveDiograph: (connections?: IConnectionObject[]) => Promise<IDiographObject>
+  importDiograph: (connections?: IConnectionObject[]) => Promise<IDiograph>
+  generateDiograph: (connections?: IConnectionObject[]) => Promise<IDiographObject | undefined>
+  diosphere: IDiosphere
+  initialiseDiosphere: (connections: IConnectionObject[]) => Promise<IDiosphere>
+  getDiosphere: (connections?: IConnectionObject[]) => Promise<IDiosphereObject | undefined>
+  saveDiosphere: (connections?: IConnectionObject[]) => Promise<IDiosphereObject>
 }

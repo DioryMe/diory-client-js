@@ -8,7 +8,7 @@ export const getDefaultDiograph = (): IDiographObject => {
   })
   diograph.addDiory(
     {
-      text: 'Room root',
+      text: 'Root',
       links: [{ id: diory.id }],
     },
     '/',
