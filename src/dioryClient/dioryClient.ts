@@ -46,7 +46,7 @@ class DioryClient implements IDioryClient {
   }
 
   initialiseDiograph = async (roomObject: IRoomObject): Promise<IDiograph> => {
-    console.info('initialiseDiograph', roomObject)
+    console.info('initialiseDiograph: room', roomObject)
     this.selectRoom(roomObject)
 
     this.diograph.resetDiograph()
@@ -55,16 +55,15 @@ class DioryClient implements IDioryClient {
 
     this.focusDiory({ id: '/' })
 
-    console.info(this.diograph.toObject())
     return this.diograph
   }
 
-  getDiograph = async (connections?: IConnectionObject[]): Promise<IDiographObject | undefined> => {
-    console.info('getDiograph', connections)
+  getDiograph = async (): Promise<IDiographObject | undefined> => {
+    console.info('getDiograph')
 
     let diographObject
     await Promise.all(
-      this.getDiographClients(connections).map(async (connectionClient) => {
+      this.getDiographClients().map(async (connectionClient) => {
         try {
           diographObject = await connectionClient.getDiograph()
           console.info(diographObject)
@@ -78,12 +77,12 @@ class DioryClient implements IDioryClient {
     return diographObject
   }
 
-  saveDiograph = async (connections?: IConnectionObject[]): Promise<IDiographObject> => {
-    console.info('saveDiograph', connections)
+  saveDiograph = async (): Promise<IDiographObject> => {
+    console.info('saveDiograph')
 
     const diographObject = this.diograph.toObject()
     await Promise.all(
-      this.getDiographClients(connections).map(async (connectionClient) => {
+      this.getDiographClients().map(async (connectionClient) => {
         await connectionClient.saveDiograph(diographObject)
         console.info(diographObject)
         return
@@ -137,7 +136,7 @@ class DioryClient implements IDioryClient {
   }
 
   initialiseDiosphere = async (connections: IConnectionObject[]): Promise<IDiosphere> => {
-    console.info('initialiseDiosphere', connections)
+    console.info('initialiseDiosphere: connections', connections)
     this.connections = connections
 
     this.diosphere.resetRooms()
@@ -146,18 +145,15 @@ class DioryClient implements IDioryClient {
 
     this.selectRoom({ id: '/' })
 
-    console.info(this.diosphere.toObject())
     return this.diosphere
   }
 
-  getDiosphere = async (
-    connections?: IConnectionObject[],
-  ): Promise<IDiosphereObject | undefined> => {
-    console.info('getDiosphere', connections)
+  getDiosphere = async (): Promise<IDiosphereObject | undefined> => {
+    console.info('getDiosphere')
 
     let diosphereObject
     await Promise.all(
-      this.getDiosphereClients(connections).map(async (connectionClient) => {
+      this.getDiosphereClients().map(async (connectionClient) => {
         try {
           diosphereObject = await connectionClient.getDiosphere()
           console.info(diosphereObject)
@@ -171,12 +167,12 @@ class DioryClient implements IDioryClient {
     return diosphereObject
   }
 
-  saveDiosphere = async (connections?: IConnectionObject[]): Promise<IDiosphereObject> => {
-    console.info('saveDiosphere', connections)
+  saveDiosphere = async (): Promise<IDiosphereObject> => {
+    console.info('saveDiosphere')
 
     const diosphereObject = this.diosphere.toObject()
     await Promise.all(
-      this.getDiosphereClients(connections).map(async (connectionClient) => {
+      this.getDiosphereClients().map(async (connectionClient) => {
         await connectionClient.saveDiosphere(diosphereObject)
         console.info(diosphereObject)
         return
