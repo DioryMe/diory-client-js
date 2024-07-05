@@ -59,12 +59,12 @@ class DioryClient implements IDioryClient {
     return this.diograph
   }
 
-  getDiograph = async (connections?: IConnectionObject[]): Promise<IDiographObject | undefined> => {
-    console.info('getDiograph', connections)
+  getDiograph = async (): Promise<IDiographObject | undefined> => {
+    console.info('getDiograph')
 
     let diographObject
     await Promise.all(
-      this.getDiographClients(connections).map(async (connectionClient) => {
+      this.getDiographClients().map(async (connectionClient) => {
         try {
           diographObject = await connectionClient.getDiograph()
           console.info(diographObject)
@@ -78,12 +78,12 @@ class DioryClient implements IDioryClient {
     return diographObject
   }
 
-  saveDiograph = async (connections?: IConnectionObject[]): Promise<IDiographObject> => {
-    console.info('saveDiograph', connections)
+  saveDiograph = async (): Promise<IDiographObject> => {
+    console.info('saveDiograph')
 
     const diographObject = this.diograph.toObject()
     await Promise.all(
-      this.getDiographClients(connections).map(async (connectionClient) => {
+      this.getDiographClients().map(async (connectionClient) => {
         await connectionClient.saveDiograph(diographObject)
         console.info(diographObject)
         return
@@ -93,8 +93,8 @@ class DioryClient implements IDioryClient {
     return diographObject
   }
 
-  importDiograph = async (connections?: IConnectionObject[]): Promise<IDiograph> => {
-    const diographObject = await this.generateDiograph(connections)
+  importDiograph = async (): Promise<IDiograph> => {
+    const diographObject = await this.generateDiograph()
 
     if (diographObject) {
       const diory = this.diory?.toObject()
@@ -115,14 +115,12 @@ class DioryClient implements IDioryClient {
     return this.diograph
   }
 
-  generateDiograph = async (
-    connections?: IConnectionObject[],
-  ): Promise<IDiographObject | undefined> => {
-    console.info('generateDiograph', connections)
+  generateDiograph = async (): Promise<IDiographObject | undefined> => {
+    console.info('generateDiograph')
 
     let diographObject
     await Promise.all(
-      this.getDiographClients(connections).map(async (connectionClient) => {
+      this.getDiographClients().map(async (connectionClient) => {
         diographObject = await connectionClient.generateDiograph()
         console.info(diographObject)
         return
@@ -150,14 +148,12 @@ class DioryClient implements IDioryClient {
     return this.diosphere
   }
 
-  getDiosphere = async (
-    connections?: IConnectionObject[],
-  ): Promise<IDiosphereObject | undefined> => {
-    console.info('getDiosphere', connections)
+  getDiosphere = async (): Promise<IDiosphereObject | undefined> => {
+    console.info('getDiosphere')
 
     let diosphereObject
     await Promise.all(
-      this.getDiosphereClients(connections).map(async (connectionClient) => {
+      this.getDiosphereClients().map(async (connectionClient) => {
         try {
           diosphereObject = await connectionClient.getDiosphere()
           console.info(diosphereObject)
@@ -171,12 +167,12 @@ class DioryClient implements IDioryClient {
     return diosphereObject
   }
 
-  saveDiosphere = async (connections?: IConnectionObject[]): Promise<IDiosphereObject> => {
-    console.info('saveDiosphere', connections)
+  saveDiosphere = async (): Promise<IDiosphereObject> => {
+    console.info('saveDiosphere')
 
     const diosphereObject = this.diosphere.toObject()
     await Promise.all(
-      this.getDiosphereClients(connections).map(async (connectionClient) => {
+      this.getDiosphereClients().map(async (connectionClient) => {
         await connectionClient.saveDiosphere(diosphereObject)
         console.info(diosphereObject)
         return
