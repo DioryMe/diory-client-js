@@ -1,19 +1,19 @@
 {
   "name": "@diory/client-js",
-  "version": "0.4.0-rc2",
+  "version": "0.4.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Olli-Pekka Pohjola <op@diory.me>, Jouni Alanen <jouni@diory.me>",
   "license": "MIT",
   "dependencies": {
-    "@diograph/diograph": "^0.4.0-rc1",
-    "@diograph/folder-generator": "^0.4.0-rc1",
-    "@diograph/local-client": "^0.4.0-rc3",
-    "@diory/diosphere-js": "^0.4.0-rc1",
+    "@diograph/diograph": "^0.4.0",
+    "@diory/connection-client-js": "^0.4.0",
+    "@diory/diosphere-js": "^0.4.0",
     "path-browserify": "^1.0.1",
     "uuid": "8.3.2"
   },
   "devDependencies": {
+    "@diory/types": "^0.4.0",
     "@types/jest": "^27.4.0",
     "@types/path-browserify": "^1.0.2",
     "@types/uuid": "8.3.2",
@@ -41,14 +41,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DioryMe/diosphere-js.git"
+    "url": "git+https://github.com/DioryMe/diory-client-js.git"
   },
   "keywords": [
     "diory",
-    "diosphere"
+    "diosphere",
+    "diograph"
   ],
   "bugs": {
-    "url": "https://github.com/DioryMe/diosphere-js/issues"
+    "url": "https://github.com/DioryMe/diory-client-js/issues"
   },
-  "homepage": "https://github.com/DioryMe/diosphere-js#readme"
+  "homepage": "https://github.com/DioryMe/diory-client-js#readme"
 }
