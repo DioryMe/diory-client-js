@@ -12,7 +12,8 @@ yarn add @diory/client-js
 
 ```
 const clients = [localClient, S3Client, ...]
-const { diosphere, room, diograph, diory } = DioryClient(clients)
+const dioryClient = DioryClient(clients)
+dioryClient.initialiseDiosphere([connections])
 diosphere.initialise([connection])
 diosphere.enterRoom(room)
 diograph.focusDiory(diory)
