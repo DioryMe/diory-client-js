@@ -11,6 +11,7 @@ import {
   IDiory,
   IDioryObject,
   IDataClient,
+  IConnectionClient,
 } from '@diory/types'
 
 import { IDioryClient } from '../types'
@@ -19,20 +20,23 @@ import { addDefaultRoom } from '../utils/addDefaultRoom'
 import { addDefaultDiograph } from '../utils/addDefaultDiograph'
 
 class DioryClient implements IDioryClient {
+  dataClients: IDataClient[]
   diosphere: IDiosphere
   diograph: IDiograph
   room?: IRoom
   diory?: IDiory
 
   constructor(dataClients: IDataClient[]) {
-    this.diosphere = new Diosphere(new ConnectionClient(dataClients))
-    this.diograph = new Diograph(new ConnectionClient(dataClients))
+    this.dataClients = dataClients
+    this.diosphere = new Diosphere()
+    this.diograph = new Diograph()
   }
 
   initialiseDiosphere = async (connections: IConnectionObject[]): Promise<IDiosphere> => {
     console.info('initialiseDiosphere: connections', connections)
 
-    this.diosphere.initialise(connections)
+    const connectionClient: IConnectionClient = new ConnectionClient(this.dataClients, connections)
+    this.diosphere.connect(connectionClient)
     await this.diosphere.getDiosphere()
 
     if (!Object.keys(this.diosphere.rooms)) {
@@ -49,7 +53,11 @@ class DioryClient implements IDioryClient {
     this.selectRoom(roomObject)
 
     if (this.room?.connections) {
-      this.diograph.initialise(this.room?.connections)
+      const connectionClient: IConnectionClient = new ConnectionClient(
+        this.dataClients,
+        this.room?.connections,
+      )
+      this.diograph.connect(connectionClient)
       await this.diograph.getDiograph()
 
       if (!Object.keys(this.diograph.diograph)) {

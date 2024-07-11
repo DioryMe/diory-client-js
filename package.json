@@ -6,14 +6,14 @@
   "author": "Olli-Pekka Pohjola <op@diory.me>, Jouni Alanen <jouni@diory.me>",
   "license": "MIT",
   "dependencies": {
-    "@diograph/diograph": "^0.4.0",
-    "@diory/connection-client-js": "^0.4.0",
-    "@diory/diosphere-js": "^0.4.0",
+    "@diograph/diograph": "^0.4.1",
+    "@diory/connection-client-js": "^0.4.1",
+    "@diory/diosphere-js": "^0.4.1",
     "path-browserify": "^1.0.1",
     "uuid": "8.3.2"
   },
   "devDependencies": {
-    "@diory/types": "^0.4.0",
+    "@diory/types": "^0.4.2",
     "@types/jest": "^27.4.0",
     "@types/path-browserify": "^1.0.2",
     "@types/uuid": "8.3.2",

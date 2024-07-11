@@ -369,32 +369,32 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@diograph/diograph@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@diograph/diograph/-/diograph-0.4.0.tgz#d10a0cc9cc950a10ccf702d31abdf9d5c6814a38"
-  integrity sha512-r4Vh97m8AVOo2LvIP7cIsq2POTMZ5sle/xpLab5lJzdaM+lpDqC/P9XccyNuRv/yZOJvAY1sFe6NkfW+8JW9WQ==
+"@diograph/diograph@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@diograph/diograph/-/diograph-0.4.1.tgz#163c223697eb8cc47bcb6ed2f2217bcf102b57a7"
+  integrity sha512-YPwJY4Im/soQDDpiYV21SrzftGVe3seY4D1D2k1pdw/1Cg1aAj6VZjXCXz0j4FM+rCDCDqlN0B5ovxJElgLFog==
   dependencies:
     ajv "^8.12.0"
     uuid "^8.3.2"
 
-"@diory/connection-client-js@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@diory/connection-client-js/-/connection-client-js-0.4.0.tgz#9243d80c9c81c883d64d0843c71f42f21bb866de"
-  integrity sha512-HzQmIbgT+Phhiq1ITfwypfdwhnsDW0FEPihozfpKUuBJWg682FxNZV7UzrgG05l66gdKGsQZ2dAZ5gCdjAqjhg==
+"@diory/connection-client-js@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@diory/connection-client-js/-/connection-client-js-0.4.1.tgz#087494ff96ae3739caa118660905a63ac586b9e0"
+  integrity sha512-7Abt0kroRyibpbpPWmcOsiPhvNozgT78ac9qRCNIaz/x/sY/JO0VJNWVrbL6cAIe5AMJYlDNwB/rv3Q7W8KR3A==
   dependencies:
     path-browserify "^1.0.1"
 
-"@diory/diosphere-js@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@diory/diosphere-js/-/diosphere-js-0.4.0.tgz#02947b21fc19fba6dfd7f6c8589a154ef6928918"
-  integrity sha512-AAJy8ZJEWdBqgVnyyiQjcfQmsa3hdNG65IU+cUXyhRlb6NEIfHeq9ruGxebXZSzm0jWfuUHbJ8ZtExO6wzJ7VA==
+"@diory/diosphere-js@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@diory/diosphere-js/-/diosphere-js-0.4.1.tgz#b3d9f4f9550f86c90a037e521c9491903373733c"
+  integrity sha512-OK251R9pvZKXuuTjAlJkW1DXtEyINGdHAWUwBp+w0WtAmvodJm8uWB9bkC8N1jdVBMIJj2BDdlY1kMsut5r+yA==
   dependencies:
     uuid "8.3.2"
 
-"@diory/types@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@diory/types/-/types-0.4.0.tgz#2bf87254fb791b8d5cde487d560aa0081fb0b388"
-  integrity sha512-meOING0ct3b8s9J6Wi1XUFFeLluUUkslmwKzOrwxP6yn1/x1BMZtJsxswaSfovmq0brx/yAXTCxY5V+Bp8SVtQ==
+"@diory/types@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@diory/types/-/types-0.4.2.tgz#ecccd118e7cef7621344001a8f8d9e3fefea1d1d"
+  integrity sha512-OWKrbb1b0Ho3Gk/KzDq992iY0LVRawaLBMj/k/FwDPRGbB45w9YJoVQkAfBHMe4DoDhrgkWFwTl0Rcg2nj5Zow==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
