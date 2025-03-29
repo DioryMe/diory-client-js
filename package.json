@@ -6,9 +6,8 @@
   "author": "Olli-Pekka Pohjola <op@diory.me>, Jouni Alanen <jouni@diory.me>",
   "license": "MIT",
   "dependencies": {
-    "@diograph/diograph": "^0.4.1",
-    "@diory/connection-client-js": "^0.4.1",
-    "@diory/diosphere-js": "^0.4.1",
+    "@diograph/diograph": "^0.4.3",
+    "@diograph/folder-generator": "^0.4.2",
     "path-browserify": "^1.0.1",
     "uuid": "8.3.2"
   },

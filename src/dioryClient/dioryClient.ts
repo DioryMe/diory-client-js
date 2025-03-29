@@ -1,82 +1,83 @@
-import { Diosphere } from '@diory/diosphere-js'
-import { Diograph } from '@diograph/diograph'
-import { ConnectionClient } from '@diory/connection-client-js'
+import { join } from 'path-browserify'
+import { IDataClient } from '@diory/types'
+import { Diograph, IDiograph, IDiographObject } from '@diograph/diograph'
+import { generateDiograph } from '@diograph/folder-generator'
 
-import {
-  IConnectionObject,
-  IDiosphere,
-  IRoom,
-  IRoomObject,
-  IDiograph,
-  IDiory,
-  IDioryObject,
-  IDataClient,
-  IConnectionClient,
-} from '@diory/types'
+import { IConnectionObject, IDioryClient } from '../types'
 
-import { IDioryClient } from '../types'
+import { debounce } from '../utils/debounce'
 
-import { addDefaultRoom } from '../utils/addDefaultRoom'
-import { addDefaultDiograph } from '../utils/addDefaultDiograph'
-
-class DioryClient implements IDioryClient {
-  dataClients: IDataClient[]
-  diosphere: IDiosphere
-  diograph: IDiograph
-  room?: IRoom
-  diory?: IDiory
-
-  constructor(dataClients: IDataClient[]) {
-    this.dataClients = dataClients
-    this.diosphere = new Diosphere()
-    this.diograph = new Diograph()
-  }
-
-  initialiseDiosphere = async (connections: IConnectionObject[]): Promise<IDiosphere> => {
-    console.info('initialiseDiosphere: connections', connections)
-
-    const connectionClient: IConnectionClient = new ConnectionClient(this.dataClients, connections)
-    this.diosphere.connect(connectionClient)
-    await this.diosphere.getDiosphere()
-
-    if (!Object.keys(this.diosphere.rooms)) {
-      addDefaultRoom(this.diosphere, connections)
-    }
-
-    this.selectRoom({ id: '/' })
-
-    return this.diosphere
-  }
-
-  initialiseDiograph = async (roomObject: IRoomObject): Promise<IDiograph> => {
-    console.info('initialiseDiograph: room', roomObject)
-    this.selectRoom(roomObject)
-
-    if (this.room?.connections) {
-      const connectionClient: IConnectionClient = new ConnectionClient(
-        this.dataClients,
-        this.room?.connections,
-      )
-      this.diograph.connect(connectionClient)
-      await this.diograph.getDiograph()
-
-      if (!Object.keys(this.diograph.diograph)) {
-        addDefaultDiograph(this.diograph)
-      }
-
-      this.focusDiory({ id: '/' })
-    }
-
-    return this.diograph
-  }
-
-  selectRoom = (roomObject: IRoomObject): IRoom => {
-    return (this.room = this.diosphere.getRoom(roomObject))
-  }
-
-  focusDiory = (dioryObject: IDioryObject): IDiory => {
-    return (this.diory = this.diograph.getDiory(dioryObject))
+const resolveConnection = (address: string): IConnectionObject => {
+  const addressArray = (address || '').split('/') || []
+  return {
+    client: addressArray[0],
+    path: addressArray.slice(1, -1).join('/'),
+    id: addressArray[addressArray.length - 1],
   }
 }
 
-export { DioryClient }
+const getDiographKey = (connection: IConnectionObject) => `${connection.client}/${connection.path}`
+
+const findDataClient = (dataClients: IDataClient[], client: string): IDataClient | undefined => {
+  return dataClients.find(({ type }) => type === client)
+}
+
+const DIOGRAPH_JSON = 'diograph.json'
+
+export class DioryClient implements IDioryClient {
+  diographs: { [address: string]: IDiograph } = {}
+  dataClients: IDataClient[]
+
+  constructor(dataClients: IDataClient[]) {
+    this.dataClients = dataClients
+  }
+
+  addDiograph = (address: string, diographObject: IDiographObject): IDioryClient => {
+    const connection = resolveConnection(address)
+    const diographKey = getDiographKey(connection)
+    this.diographs[diographKey] = new Diograph(this.saveDiograph(address)).addDiograph(
+      diographObject,
+    )
+    return this
+  }
+
+  getDiograph = (address: string): IDiograph | undefined => {
+    const connection = resolveConnection(address)
+    const diographKey = getDiographKey(connection)
+    return this.diographs[diographKey]
+  }
+
+  fetchDiograph = async (address: string): Promise<IDioryClient> => {
+    const { client, path } = resolveConnection(address)
+    const dataClient = findDataClient(this.dataClients, client)
+    if (dataClient) {
+      const diographString = await dataClient.readTextItem(join(path, DIOGRAPH_JSON))
+      if (diographString) this.addDiograph(address, JSON.parse(diographString))
+    }
+
+    return this
+  }
+
+  generateDiograph = async (address: string): Promise<IDioryClient> => {
+    const { client, path } = resolveConnection(address)
+    const dataClient = findDataClient(this.dataClients, client)
+    if (dataClient) {
+      const diographObject = await generateDiograph(path, '/', dataClient)
+      if (diographObject) this.addDiograph(address, diographObject)
+    }
+
+    return this
+  }
+
+  saveDiograph = (address: string) =>
+    debounce(async () => {
+      const { client, path } = resolveConnection(address)
+      const dataClient = findDataClient(this.dataClients, client)
+      if (dataClient) {
+        const diograph = this.getDiograph(address)
+        if (diograph) dataClient.writeItem(join(path, DIOGRAPH_JSON), diograph.toJson())
+      }
+
+      return
+    }, 1000)
+}

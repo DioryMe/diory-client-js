@@ -11,22 +11,20 @@ yarn add @diory/client-js
 ## Usage
 
 ```
-const clients = [localClient, S3Client, ...]
-const dioryClient = DioryClient(clients)
-dioryClient.initialiseDiosphere([connections])
-diosphere.initialise([connection])
-diosphere.enterRoom(room)
-diograph.focusDiory(diory)
-console.log('Hello Diosphere!', diosphere.toObject())
+const dataClients = [localClient, S3Client, ...]
+const dioryClient = new DioryClient(clients)
+const diograph = dioryClient.getDiograph(address)
+console.log('My Diory', diograph.toObject())
 ```
 
-### Internal methods
+### Methods
 
 ```
-client.getDiosphere()
-client.saveDiosphere()
-client.getDiograph()
-client.saveDiograph()
+dioryClient.addDiograph(address, diograph)
+dioryClient.getDiograph(address)
+dioryClient.fetchDiograph(address)
+dioryClient.generateDiograph(address)
+dioryClient.saveDiograph(address)
 ```
 
 ## Development

@@ -369,27 +369,35 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@diograph/diograph@^0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@diograph/diograph/-/diograph-0.4.1.tgz#163c223697eb8cc47bcb6ed2f2217bcf102b57a7"
-  integrity sha512-YPwJY4Im/soQDDpiYV21SrzftGVe3seY4D1D2k1pdw/1Cg1aAj6VZjXCXz0j4FM+rCDCDqlN0B5ovxJElgLFog==
+"@diograph/diograph@0.4.3", "@diograph/diograph@^0.4.3":
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/@diograph/diograph/-/diograph-0.4.3.tgz#76b51cbc4e6006acf5c31417c4553ed5fbe5c2f2"
+  integrity sha512-qczndQiDw64zDTX078nc7MYgEkMnxlnBQfGmpcu/p5tdVlFjy8x4sP7tlQc7jP4wGdQMnRdWeEg3VgSC+jaiIQ==
   dependencies:
     ajv "^8.12.0"
+    path-browserify "^1.0.1"
     uuid "^8.3.2"
 
-"@diory/connection-client-js@^0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@diory/connection-client-js/-/connection-client-js-0.4.1.tgz#087494ff96ae3739caa118660905a63ac586b9e0"
-  integrity sha512-7Abt0kroRyibpbpPWmcOsiPhvNozgT78ac9qRCNIaz/x/sY/JO0VJNWVrbL6cAIe5AMJYlDNwB/rv3Q7W8KR3A==
+"@diograph/file-generator@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@diograph/file-generator/-/file-generator-0.4.0.tgz#ff88c79aef9a512f78b0fd71c820a48632558aec"
+  integrity sha512-aYhcGAWJY8OuVMCaT83KRRQySdDYH3jOuFlEbk3LXwSC32FAsAClYcBkxWty2w1RIV9/h8hGE5xzh7jRgAFiag==
   dependencies:
+    "@diograph/diograph" "0.4.3"
+    exifreader "^4.8.1"
+    multiformats "^9.6.0"
     path-browserify "^1.0.1"
+    uuid "^9.0.0"
 
-"@diory/diosphere-js@^0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@diory/diosphere-js/-/diosphere-js-0.4.1.tgz#b3d9f4f9550f86c90a037e521c9491903373733c"
-  integrity sha512-OK251R9pvZKXuuTjAlJkW1DXtEyINGdHAWUwBp+w0WtAmvodJm8uWB9bkC8N1jdVBMIJj2BDdlY1kMsut5r+yA==
+"@diograph/folder-generator@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@diograph/folder-generator/-/folder-generator-0.4.2.tgz#4336bd680927472e156e1322eb460330d1fb5b28"
+  integrity sha512-zps3oYRhEt2vmkB2mhW1HKsk8iahD4l27bg6BZlk+XCtcWfHI1curz6qEbggMSVHOPctJWcwQksxFytwvN0bsg==
   dependencies:
-    uuid "8.3.2"
+    "@diograph/diograph" "0.4.3"
+    "@diograph/file-generator" "0.4.0"
+    path-browserify "^1.0.1"
+    uuid "^8.3.2"
 
 "@diory/types@^0.4.2":
   version "0.4.2"
@@ -754,6 +762,11 @@
   integrity sha512-tHhzvkFXZQeTECenFoRljLBYPZJ7jAVxqqtEI0qTLOmuultnFp4I9yKE17vTuhf7BkhCu7I4XuemPgikDVuYqA==
   dependencies:
     "@types/yargs-parser" "*"
+
+"@xmldom/xmldom@^0.9.4":
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.9.8.tgz#1471e82bdff9e8f20ee8bbe60d4ffa8a516e78d8"
+  integrity sha512-p96FSY54r+WJ50FIOsCOjyj/wavs8921hG5+kVMmZgKcvIKxMXHTrjNJvRgWa/zuX3B6t2lijLNFaOyuxUH+2A==
 
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.6"
@@ -1239,6 +1252,13 @@ execa@^5.0.0:
     onetime "^5.1.2"
     signal-exit "^3.0.3"
     strip-final-newline "^2.0.0"
+
+exifreader@^4.8.1:
+  version "4.27.0"
+  resolved "https://registry.yarnpkg.com/exifreader/-/exifreader-4.27.0.tgz#2fe47d3f982402e546d9491bd063b912ee0b29bb"
+  integrity sha512-wrjtidE4MN5yQGI0ydeJm0Yw+HeCrziQGj5MccnHS0G+IyDoF8cyazKabXxj9F5LjXxqYTKiXm9nTYqvKAESzg==
+  optionalDependencies:
+    "@xmldom/xmldom" "^0.9.4"
 
 exit@^0.1.2:
   version "0.1.2"
@@ -2104,6 +2124,11 @@ ms@2.1.2:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
+multiformats@^9.6.0:
+  version "9.9.0"
+  resolved "https://registry.yarnpkg.com/multiformats/-/multiformats-9.9.0.tgz#c68354e7d21037a8f1f8833c8ccd68618e8f1d37"
+  integrity sha512-HoMUjhH9T8DDBNT+6xzkrd9ga/XiBI4xLr58LJACwK6G3HTOPeMz4nB4KJs33L2BelrIJa7P0VuNaVF3hMYfjg==
+
 natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
@@ -2609,6 +2634,11 @@ uuid@8.3.2, uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+
+uuid@^9.0.0:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.1.tgz#e188d4c8853cc722220392c424cd637f32293f30"
+  integrity sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==
 
 v8-to-istanbul@^8.1.0:
   version "8.1.1"

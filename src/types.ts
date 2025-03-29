@@ -1,13 +1,17 @@
-import { IConnectionObject, IDiosphere, IRoom, IRoomObject } from '@diory/types'
-import { IDiograph, IDiory, IDioryObject } from '@diory/types'
+import { IDataClient } from '@diory/types'
+import { IDiograph } from '@diograph/diograph'
+
+export type IConnectionObject = {
+  client: string
+  path: string
+  id: string
+}
 
 export interface IDioryClient {
-  diosphere: IDiosphere
-  diograph: IDiograph
-  room?: IRoom
-  diory?: IDiory
-  initialiseDiosphere: (connections: IConnectionObject[]) => Promise<IDiosphere>
-  initialiseDiograph: (roomObject: IRoomObject) => Promise<IDiograph>
-  selectRoom: (roomObject: IRoomObject) => IRoom
-  focusDiory: (dioryObject: IDioryObject) => IDiory
+  diographs: { [address: string]: IDiograph }
+  dataClients: IDataClient[]
+  getDiograph: (address: string) => IDiograph | undefined
+  generateDiograph: (address: string) => Promise<IDioryClient>
+  fetchDiograph: (address: string) => Promise<IDioryClient>
+  saveDiograph: (address: string) => () => void
 }
