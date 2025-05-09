@@ -58,11 +58,12 @@ export class DioryClient implements IDioryClient {
     return this
   }
 
-  generateDiograph = async (address: string): Promise<IDioryClient> => {
+  generateDiograph = async (address: string, saveDiograph?: boolean): Promise<IDioryClient> => {
     const { client, path } = resolveConnection(address)
     const dataClient = findDataClient(this.dataClients, client)
     if (dataClient) {
-      const diographObject = await generateDiograph(path, '/', dataClient)
+      // TODO save based on client properties
+      const diographObject = await generateDiograph(path, '/', dataClient, { saveDiograph })
       if (diographObject) this.addDiograph(address, diographObject)
     }
 

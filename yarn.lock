@@ -389,10 +389,10 @@
     path-browserify "^1.0.1"
     uuid "^9.0.0"
 
-"@diograph/folder-generator@^0.4.2":
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/@diograph/folder-generator/-/folder-generator-0.4.2.tgz#4336bd680927472e156e1322eb460330d1fb5b28"
-  integrity sha512-zps3oYRhEt2vmkB2mhW1HKsk8iahD4l27bg6BZlk+XCtcWfHI1curz6qEbggMSVHOPctJWcwQksxFytwvN0bsg==
+"@diograph/folder-generator@^0.4.3":
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/@diograph/folder-generator/-/folder-generator-0.4.3.tgz#2e33f0948e4591547717c7542911cc762a63879c"
+  integrity sha512-7tIuSrSqLGhtv9enmmkPTZC8dQgidm0Gl8vB6zgoD3znjR7fO7v6MoWvPqA4CmeJr06rvwRVopd8iCNL3h2noQ==
   dependencies:
     "@diograph/diograph" "0.4.3"
     "@diograph/file-generator" "0.4.0"

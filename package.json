@@ -1,13 +1,13 @@
 {
   "name": "@diory/client-js",
-  "version": "0.4.1",
+  "version": "0.4.2-rc5",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Olli-Pekka Pohjola <op@diory.me>, Jouni Alanen <jouni@diory.me>",
   "license": "MIT",
   "dependencies": {
     "@diograph/diograph": "^0.4.3",
-    "@diograph/folder-generator": "^0.4.2",
+    "@diograph/folder-generator": "^0.4.3",
     "path-browserify": "^1.0.1",
     "uuid": "8.3.2"
   },
